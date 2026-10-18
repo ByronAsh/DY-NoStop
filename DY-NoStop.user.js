@@ -21,7 +21,7 @@
   if (window.__dzNoAutoStop) return;
   window.__dzNoAutoStop = true;
 
-  var VERSION = '4.2.0';
+  var VERSION = '4.3.0';
   var T0_WALL = Date.now();
   var T0_PERF = (window.performance && performance.now) ? performance.now() : Date.now();
 
@@ -79,13 +79,17 @@
   function isLive(v) {
     return !v.paused && !v.ended && v.readyState > 2;
   }
+  // 只统计正在出声的视频，静音预加载不算「别的在播」
+  function isAudible(v) {
+    return !v.paused && !v.ended && v.readyState > 2 && !v.muted && v.volume > 0;
+  }
   function hasOtherPlaying(v) {
     var vs = document.getElementsByTagName('video');
     for (var i = 0; i < vs.length; i++) {
       var o = vs[i];
       if (o === v) continue;
       if (isPiP(o)) continue;
-      if (isLive(o)) return true;
+      if (isAudible(o)) return true;
     }
     return false;
   }
@@ -309,6 +313,7 @@
           idx: i,
           paused: v.paused,
           live: isLive(v),
+          audible: isAudible(v),
           pip: isPiP(v),
           inView: isInViewport(v),
           rs: v.readyState,
