@@ -2,7 +2,7 @@
 // @name         抖音 阻止自动停止播放
 // @name:en      DY-NoStop
 // @namespace    https://github.com/ByronAsh/DY-NoStop
-// @version      4.2.0
+// @version      4.3.0
 // @description  阻止抖音网页端非用户意图的自动暂停，放行用户主动暂停、切换视频、视口外视频、断网与播放结束，保护画中画
 // @description:en  Stop Douyin from pausing your video on its own. User-initiated pauses, video switching, off-screen videos, offline state and ended playback are left alone; picture-in-picture is protected.
 // @author       ByronAsh
